@@ -2,8 +2,7 @@
 # Change this to something lighter weight later
 FROM ubuntu:latest
 
-RUN sudo apt-get update && \
-    sudo apt-get install wget
+RUN apt-get update && apt-get install wget
 
 WORKDIR /root
 
