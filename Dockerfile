@@ -2,12 +2,15 @@
 # Change this to something lighter weight later
 FROM ubuntu:latest
 
-ENV RAIBLOCKS_URL=https://github.com/clemahieu/raiblocks/releases/download/V8.0/rai_node.xz
+RUN sudo apt-get update && \
+    sudo apt-get install wget
 
 WORKDIR /root
 
+ENV RAIBLOCKS_URL=https://github.com/clemahieu/raiblocks/releases/download/V8.0/rai_node.xz
+
 RUN wget ${RAIBLOCKS_URL} && \
-    tar xf rai_node.xz && \
+    tar xf rai_node.xz
 
 EXPOSE 7075 7076
 
