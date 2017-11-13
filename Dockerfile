@@ -2,7 +2,7 @@
 # Change this to something lighter weight later
 FROM ubuntu:latest
 
-RUN apt-get update && apt-get install -y wget
+RUN apt-get update && apt-get install -y wget xz-utils
 
 WORKDIR /root
 
