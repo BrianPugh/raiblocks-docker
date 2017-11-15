@@ -19,8 +19,8 @@ ENV RAIBLOCKS_URL=https://github.com/clemahieu/raiblocks/releases/download/V8.0/
 WORKDIR /root
 
 RUN wget -O boost_1_63_0.tar.gz ${BOOST_URL} && \
-    tar xzvf boost_1_63_0.tar.gz cd boost_1_63_0 && \
-    ./bootstrap.sh "--prefix=${BOOST_ROOT}" && \
+    tar xzf boost_1_63_0.tar.gz cd boost_1_63_0 && \
+    ./bootstrap.sh --prefix=${BOOST_ROOT} && \
     ./b2 --prefix=$BOOST_ROOT --build-dir=$BOOST_BUILD link=static install && \
     git clone https://github.com/clemahieu/raiblocks.git && \
     cd raiblocks && \
