@@ -3,7 +3,7 @@
 FROM ubuntu:latest
 
 RUN apt-get update && \
-    apt-get install wget \
+    apt-get install -y wget \
         autotools-dev \
         build-essential \
         g++ \
