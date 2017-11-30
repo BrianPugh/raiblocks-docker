@@ -27,7 +27,7 @@ RUN wget -O boost_1_63_0.tar.gz ${BOOST_URL} && \
     cd $HOME && \
     git clone $RAIBLOCKS_GIT && \
     cd raiblocks && \
-    sed -i 's/-msse4/-msse3/g' CMakeLists.txt && \ # Make compatible with older processor
+    sed -i 's/-msse4/-msse3/g' CMakeLists.txt && \
     cmake . && \
     make rai_node
 
