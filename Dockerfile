@@ -12,9 +12,9 @@ RUN apt-get update && \
         libicu-dev \
         libbz2-dev
 
-ENV BOOST_ROOT=$HOME/opt/boost_1_63_0 \
+ENV BOOST_ROOT=/root/opt/boost_1_63_0 \
     BOOST_URL=http://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.tar.gz/download \
-    BOOST_BUILD=$HOME/opt/boost_1_63_0.BUILD \
+    BOOST_BUILD=/root/opt/boost_1_63_0.BUILD \
     RAIBLOCKS_GIT=https://github.com/clemahieu/raiblocks.git
 
 WORKDIR /root
@@ -25,7 +25,7 @@ RUN wget -O boost_1_63_0.tar.gz ${BOOST_URL} && \
     cd boost_1_63_0 && \
     ./bootstrap.sh --prefix=${BOOST_ROOT} && \
     ./b2 --prefix=$BOOST_ROOT --build-dir=$BOOST_BUILD link=static install && \
-    cd $HOME && \
+    cd .. && \
     git clone --recursive $RAIBLOCKS_GIT && \
     cd raiblocks && \
     sed -i 's/-msse4/-msse3/g' CMakeLists.txt && \
