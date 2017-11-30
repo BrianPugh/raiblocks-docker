@@ -25,7 +25,7 @@ RUN wget -O boost_1_63_0.tar.gz ${BOOST_URL} && \
     ./bootstrap.sh --prefix=${BOOST_ROOT} && \
     ./b2 --prefix=$BOOST_ROOT --build-dir=$BOOST_BUILD link=static install && \
     cd $HOME && \
-    git clone $RAIBLOCKS_GIT && \
+    git clone --recursive $RAIBLOCKS_GIT && \
     cd raiblocks && \
     sed -i 's/-msse4/-msse3/g' CMakeLists.txt && \
     cmake . && \
