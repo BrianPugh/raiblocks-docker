@@ -21,6 +21,7 @@ WORKDIR /root
 
 RUN wget -O boost_1_63_0.tar.gz ${BOOST_URL} && \
     tar xzf boost_1_63_0.tar.gz && \
+    rm boost_1_63_0.tar.gz && \
     cd boost_1_63_0 && \
     ./bootstrap.sh --prefix=${BOOST_ROOT} && \
     ./b2 --prefix=$BOOST_ROOT --build-dir=$BOOST_BUILD link=static install && \
@@ -30,6 +31,8 @@ RUN wget -O boost_1_63_0.tar.gz ${BOOST_URL} && \
     sed -i 's/-msse4/-msse3/g' CMakeLists.txt && \
     cmake . && \
     make rai_node
+    
+VOLUME /root
 
 EXPOSE 7075 7076
 
