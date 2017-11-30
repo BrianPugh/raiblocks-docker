@@ -6,6 +6,7 @@ RUN apt-get update && \
         git \
         autotools-dev \
         build-essential \
+        cmake \
         g++ \
         python-dev \
         libicu-dev \
