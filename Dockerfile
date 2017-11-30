@@ -1,5 +1,4 @@
 # sudo docker run -d -p 7075:7075/udp -p 7075:7075 -p 127.0.0.1:7076:7076 -v host_appdata_folder:/root brianpugh/rai_node
-# Change this to something lighter weight later
 FROM ubuntu:latest
 
 RUN apt-get update && \
@@ -12,10 +11,10 @@ RUN apt-get update && \
         libicu-dev \
         libbz2-dev
 
-ENV RAIBLOCKS_URL=https://github.com/clemahieu/raiblocks/releases/download/V8.0/rai_node.xz \
-    BOOST_ROOT=$HOME/opt/boost_1_63_0 \
+ENV BOOST_ROOT=$HOME/opt/boost_1_63_0 \
     BOOST_URL=http://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.tar.gz/download \
-    BOOST_BUILD=$HOME/opt/boost_1_63_0.BUILD
+    BOOST_BUILD=$HOME/opt/boost_1_63_0.BUILD \
+    RAIBLOCKS_GIT=https://github.com/clemahieu/raiblocks.git
 
 WORKDIR /root
 
@@ -24,10 +23,13 @@ RUN wget -O boost_1_63_0.tar.gz ${BOOST_URL} && \
     cd boost_1_63_0 && \
     ./bootstrap.sh --prefix=${BOOST_ROOT} && \
     ./b2 --prefix=$BOOST_ROOT --build-dir=$BOOST_BUILD link=static install && \
-    git clone https://github.com/clemahieu/raiblocks.git && \
+    cd $HOME && \
+    git clone $RAIBLOCKS_GIT && \
     cd raiblocks && \
+    sed -i 's/-msse4/-msse3/g' CMakeLists.txt && \ # Make compatible with older processor
+    cmake . && \
     make rai_node
 
 EXPOSE 7075 7076
 
-ENTRYPOINT ./rai_node --daemon
+ENTRYPOINT ./raiblocks/rai_node --daemon
