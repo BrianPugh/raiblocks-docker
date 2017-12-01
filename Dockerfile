@@ -25,8 +25,9 @@ RUN wget -O boost_1_63_0.tar.gz ${BOOST_URL} && \
     cd boost_1_63_0 && \
     ./bootstrap.sh --prefix=${BOOST_ROOT} && \
     ./b2 --prefix=$BOOST_ROOT --build-dir=$BOOST_BUILD link=static install && \
-    cd .. && \
-    git clone --recursive $RAIBLOCKS_GIT raiblocks_git && \
+    cd ..
+    
+RUN git clone --recursive $RAIBLOCKS_GIT && \
     cd raiblocks_git && \
     sed -i 's/-msse4/-msse3/g' CMakeLists.txt && \
     cmake . && \
@@ -36,4 +37,4 @@ VOLUME /root/RaiBlocks
 
 EXPOSE 7075 7076
 
-ENTRYPOINT ./raiblocks_git/rai_node --daemon
+ENTRYPOINT ./raiblocks/rai_node --daemon
