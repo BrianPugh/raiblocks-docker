@@ -10,7 +10,8 @@ RUN apt-get update && \
         g++ \
         python-dev \
         libicu-dev \
-        libbz2-dev
+        libbz2-dev \
+        vim
 
 ENV BOOST_ROOT=/root/opt/boost_1_63_0 \
     BOOST_URL=http://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.tar.gz/download \
@@ -29,9 +30,8 @@ RUN wget -O boost_1_63_0.tar.gz ${BOOST_URL} && \
     
 RUN git clone --recursive $RAIBLOCKS_GIT && \
     cd raiblocks_git && \
-    sed -i 's/-msse4/-msse3/g' CMakeLists.txt && \
-    cmake . && \
-    make rai_node
+    cd cryptopp && cmake . && make -j4 && cd .. && \
+    cmake . && make rai_node
     
 VOLUME /root/RaiBlocks
 
