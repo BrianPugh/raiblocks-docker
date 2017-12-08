@@ -13,8 +13,6 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /root
 
-VOLUME /root
-
 ENV RAIBLOCKS_URL=https://github.com/clemahieu/raiblocks/releases/download/V8.0/rai_node.xz
 
 RUN wget ${RAIBLOCKS_URL} && \
