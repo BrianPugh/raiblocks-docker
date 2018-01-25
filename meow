@@ -38,14 +38,13 @@
 # If you need to issue CLI commands, for example:
 #     ./rai_node --wallet-list
 
-FROM ubuntu:16.04
+FROM alpine:3.7
 LABEL maintainer="Brian Pugh"
 
-RUN apt-get update && yes | apt-get install \
-    g++ \
+RUN apk add --update --no-cache \
+	 build-base \
 	 cmake \
 	 git \
-	python \
      wget
 
 # Easy configurable values
@@ -57,27 +56,12 @@ ENV BOOST_VER=66 \
 ENV BOOST_URL=http://sourceforge.net/projects/boost/files/boost/1.${BOOST_VER}.0/boost_1_${BOOST_VER}_0.tar.gz/download
 
 WORKDIR /
+
 # Get and install boost
 RUN wget -O boost.tar.gz ${BOOST_URL} && \
     mkdir boost && \
     tar xzf boost.tar.gz -C boost --strip-components 1 && \
     rm boost.tar.gz && \
     cd boost && \
-    ./bootstrap.sh && \
-    ./b2 --prefix=/[boost] link=static install; exit 0
+    ./bootstrap.sh /bin/sh
 
-# Clone the RaiBlocks git, change branch, and build
-RUN git clone ${XRB_URL} raiblocks && \
-    cd raiblocks && \
-	git checkout ${XRB_BRANCH} && \
-	git submodule init && \
-	git submodule update && \
-    mkdir build && \
-    cd build && \
-    cmake -DBOOST_ROOT=/[boost] -G "Unix Makefiles" .. && \
-	make rai_node && \
-    mv rai_node /
-
-EXPOSE 7075 7075/udp 7076
-
-CMD ["/rai_node", "--daemon"]
