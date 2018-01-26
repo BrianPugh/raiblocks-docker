@@ -10,7 +10,7 @@ docker run -d \
     -p 7075:7075 \
     -p 127.0.0.1:7076:7076 \
     -v <HOST_FOLDER>:/root/RaiBlocks \
-    brianpugh/rai_node
+    brianpugh/raiblocks-docker
 ```
 
 Where <HOST_FOLDER> is where you want the ledger and config files to be stored
@@ -78,7 +78,7 @@ docker run -it \
     -p 7075:7075 \
     -p 127.0.0.1:7076:7076 \
     -v <HOST_FOLDER>:/root/RaiBlocks \
-    brianpugh/rai_node /bin/sh
+    brianpugh/raiblocks-docker /bin/sh
 ```
 From here you can issue CLI commands; for example:
     ./rai_node --wallet-list
@@ -93,7 +93,7 @@ docker run -d \
     -p 7075:7075 \
     -p 127.0.0.1:7076:7076 \
     -v <HOST_FOLDER>:/root/RaiBlocks \
-    brianpugh/rai_node
+    brianpugh/raiblocks-docker
 ```
 
 # Stopping An Instance
