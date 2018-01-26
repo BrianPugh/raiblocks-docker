@@ -35,19 +35,19 @@ command you use to spin up the docker instance.
 * Set ``"address":"::ffff:0.0.0.0",``
 
 You can test the RPC by issueing POST commands, for example:
-    curl -d '{"action":"block_count"}' 127.0.01:7076
+```curl -d '{"action":"block_count"}' 127.0.01:7076```
 
 ## Enable Callbacks
 Callbacks is where the rai_node sends a POST command for every incoming block.
 Note that if you enable callbacks you have to also forward the port in the
 docker container to the host while starting an instance, i.e ``-p 17076:17076``.
 
-For typical local operations, <IP>=127.0.0.1 and <PORT>=17076 are good defaults:
-* Set "callback_address": "<IP>",
-* Set "callback_port": "<PORT>",
+For typical local operations, ``<IP>=127.0.0.1`` and ``<PORT>=17076`` are good defaults:
+* Set ``"callback_address": "<IP>",``
+* Set ``"callback_port": "<PORT>",``
 
 ## Enable OpenCL for systems with GPUs:
-* Set "opencl_enable":"true",
+* Set ``"opencl_enable":"true",``
 * Changing the other opencl options are unnecessary, only change if you really
 know what you are doing.
 
@@ -56,7 +56,7 @@ You can edit the Dockerfile to change which git branch you use by changing the
 XRB_BRANCH environmental variable to the branch name you would like to use.
 
 To subsequently build your new dockerfile, you can call
-    docker build -t "brianpugh:rai_node_custom" .
+```docker build -t "brianpugh:rai_node_custom" .```
 
 To then spin up an instance of this newly build docker, you can call
 ```
@@ -81,7 +81,7 @@ docker run -it \
     brianpugh/raiblocks-docker /bin/sh
 ```
 From here you can issue CLI commands; for example:
-    ./rai_node --wallet-list
+```./rai_node --wallet-list```
 
 Once you are done with your CLI commands, exit the docker image with
 ``exit``.
@@ -98,6 +98,6 @@ docker run -d \
 
 # Stopping An Instance
 In general, to list all running docker instances, issue the command:
-    docker ps
+```docker ps```
 In general, to stop a specific instance, issue the command:
-    docker stop <container_id or container_name>
+```docker stop <container_id or container_name>```
