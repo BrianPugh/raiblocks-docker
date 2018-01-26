@@ -23,6 +23,10 @@ After the initial run, the ldb file and config.json will be in <HOST_FOLDER>.
 You can now kill the instance, configure the config.json to do things like:
 
 ## Enable RPC:
+To enable RPC commands, edit the following in <HOST_FOLDER>/config.json after
+running (and killing) the docker image at least once. Leave the port to the
+default 7076, if you want a different port on the host, change that in the
+command you use to spin up the docker instance.
 * Set ``"rpc_enable": "true",``
 * Set ``"enable_control": "true",``
 * Set ``"address":"::ffff:0.0.0.0",``
@@ -86,5 +90,10 @@ docker run -d \
     brianpugh/rai_node
 ```
 
-# Killing An Instance
-
+# Stopping An Instance
+To stop a running instance, you can issue the command:
+    docker stop brianpugh/rai_node
+In general, to list all running docker instances, issue the command:
+    docker ps
+In general, to stop a specific instance, issue the command:
+    docker stop <container_id or container_name>
