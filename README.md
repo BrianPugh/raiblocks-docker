@@ -20,7 +20,10 @@ remote RDP access and you have proper firewalls and other network configurations
 in place.
 
 After the initial run, the ldb file and config.json will be in <HOST_FOLDER>.
-You can now kill the instance, configure the config.json to do things like:
+You can now stop the instance, configure the config.json to do things like.
+You probably wont even have to stop it, it'll probably hit the following error
+and stop itself:
+    Error while running node (Cannot assign requested address)
 
 ## Enable RPC:
 To enable RPC commands, edit the following in <HOST_FOLDER>/config.json after
@@ -30,6 +33,9 @@ command you use to spin up the docker instance.
 * Set ``"rpc_enable": "true",``
 * Set ``"enable_control": "true",``
 * Set ``"address":"::ffff:0.0.0.0",``
+
+You can test the RPC by issueing POST commands, for example:
+    curl -d '{"action":"block_count"}' 127.0.01:7076
 
 ## Enable Callbacks
 Callbacks is where the rai_node sends a POST command for every incoming block.
@@ -91,8 +97,6 @@ docker run -d \
 ```
 
 # Stopping An Instance
-To stop a running instance, you can issue the command:
-    docker stop brianpugh/rai_node
 In general, to list all running docker instances, issue the command:
     docker ps
 In general, to stop a specific instance, issue the command:
