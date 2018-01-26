@@ -3,10 +3,10 @@ LABEL maintainer="Brian Pugh <bnp117@gmail.com>"
 
 # Install some standard packages
 RUN apt-get update && yes | apt-get install \
-	cmake \
+    cmake \
     g++ \
-	git \
-	python \
+    git \
+    python \
     wget
 
 # Easy configurable values; if you want these values to impact the docker image,
@@ -29,13 +29,13 @@ RUN wget -O boost.tar.gz ${BOOST_URL} \
 # Clone the RaiBlocks git, change branch, and build
 RUN git clone ${XRB_URL} raiblocks \
     && cd raiblocks \
-	&& git checkout ${XRB_BRANCH} \
-	&& git submodule init \
-	&& git submodule update \
+    && git checkout ${XRB_BRANCH} \
+    && git submodule init \
+    && git submodule update \
     && mkdir build \
     && cd build \
     && cmake -DBOOST_ROOT=/[boost] -G "Unix Makefiles" .. \
-	&& make rai_node \
+    && make rai_node \
     && mv rai_node /
 
 EXPOSE 7075 7075/udp 7076
