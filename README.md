@@ -68,30 +68,28 @@ docker run -d \
 
 # Issuing CLI commands
 Currently, some items like ``wallet_id`` cannot be queried via RPC commands and
-must be queried via command line arguments. The best way to do this is to start
-an instance of this docker with a shell overide:
+must be queried via command line arguments. You can issue CLI commands while
+the docker instance is running. First find your docker instance's container_id
+via:
 ```
-docker run -it \
-    -p 7075:7075/udp \
-    -p 7075:7075 \
-    -p 127.0.0.1:7076:7076 \
-    -v <HOST_FOLDER>:/root/RaiBlocks \
-    brianpugh/raiblocks-docker /bin/sh
+sudo docker exec <CONTAINER_ID> /rai_node <command_parameters>
 ```
-From here you can issue CLI commands; for example:
-```./rai_node --wallet-list```
+Common commands would be:
 
-Once you are done with your CLI commands, exit the docker image with
-``exit``.
+## Cleaning up the local database (reduces size and disk I/O):
 
-You can then start the docker command again with the standard:
 ```
-docker run -d \
-    -p 7075:7075/udp \
-    -p 7075:7075 \
-    -p 127.0.0.1:7076:7076 \
-    -v <HOST_FOLDER>:/root/RaiBlocks \
-    brianpugh/raiblocks-docker
+sudo docker exec <CONTAINER_ID> /rai_node --vacuum
+```
+
+## Finding Wallet ID's and Addresses
+```
+sudo docker exec <CONTAINER_ID> /rai_node --wallet_list
+```
+
+## Backing Up Seed
+```
+sudo docker exec <CONTAINER_ID> /rai_node --wallet_decrypt_unsafe --wallet <WALLET_ID>
 ```
 
 # Stopping An Instance
