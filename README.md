@@ -39,8 +39,6 @@ You can test the RPC by issueing POST commands, for example:
 
 ## Enable Callbacks
 Callbacks is where the rai_node sends a POST command for every incoming block.
-Note that if you enable callbacks you have to also forward the port in the
-docker container to the host while starting an instance, i.e ``-p 17076:17076``.
 
 For typical local operations, ``<IP>=127.0.0.1`` and ``<PORT>=17076`` are good defaults:
 * Set ``"callback_address": "<IP>",``
