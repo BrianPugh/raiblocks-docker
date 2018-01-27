@@ -70,26 +70,28 @@ docker run -d \
 Currently, some items like ``wallet_id`` cannot be queried via RPC commands and
 must be queried via command line arguments. You can issue CLI commands while
 the docker instance is running. First find your docker instance's container_id
-via:
+via ``docker ps``.
+
+Then commands can be issued:
 ```
-sudo docker exec <CONTAINER_ID> /rai_node <command_parameters>
+docker exec <CONTAINER_ID> /rai_node <command_parameters>
 ```
 Common commands would be:
 
 ## Cleaning up the local database (reduces size and disk I/O):
 
 ```
-sudo docker exec <CONTAINER_ID> /rai_node --vacuum
+docker exec <CONTAINER_ID> /rai_node --vacuum
 ```
 
 ## Finding Wallet ID's and Addresses
 ```
-sudo docker exec <CONTAINER_ID> /rai_node --wallet_list
+docker exec <CONTAINER_ID> /rai_node --wallet_list
 ```
 
 ## Backing Up Seed
 ```
-sudo docker exec <CONTAINER_ID> /rai_node --wallet_decrypt_unsafe --wallet <WALLET_ID>
+docker exec <CONTAINER_ID> /rai_node --wallet_decrypt_unsafe --wallet <WALLET_ID>
 ```
 
 # Stopping An Instance
