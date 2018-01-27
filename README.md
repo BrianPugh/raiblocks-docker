@@ -5,7 +5,7 @@ A Dockerfile that will build RaiBlocks from source
 For the majority of users, you can run this docker by using the following
 command:
 ```
-docker run -d \
+docker run --restart unless-stopped -d \
     -p 7075:7075/udp \
     -p 7075:7075 \
     -p 127.0.0.1:7076:7076 \
@@ -78,7 +78,7 @@ docker exec <CONTAINER_ID> /rai_node <command_parameters>
 ```
 Common commands would be:
 
-## Cleaning up the local database (reduces size and disk I/O):
+## Cleaning up the local database (reduces size and disk I/O)
 
 ```
 docker exec <CONTAINER_ID> /rai_node --vacuum
