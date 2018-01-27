@@ -101,4 +101,4 @@ In general, to stop a specific instance, issue the command:
 ```docker stop <container_id or container_name>```
 
 # Automatic Updating
-This docker container automatically builds from the RaiBlocks Master git branch within 2 hours whenever there is a new commit. Your local docker instance, however, only updates when told to. You can also have your local container restart and update whenever this docker container is updated via another docker container (like watchtower)[https://github.com/v2tec/watchtower].
+This docker container automatically builds from the RaiBlocks Master git branch within 2 hours whenever there is a new commit. Your local docker instance, however, only updates when told to. You can also have your local container restart and update whenever this docker container is updated via another docker container like [watchtower](https://github.com/v2tec/watchtower).
