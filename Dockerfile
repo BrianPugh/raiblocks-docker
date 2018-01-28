@@ -2,19 +2,15 @@ FROM alpine:3.7
 LABEL maintainer="Brian Pugh <bnp117@gmail.com>"
 
 # Install some standard packages
-RUN apk add --update --no-cache \
-     build-base \
-     cmake \
-     g++ \
-     git \
-     linux-headers \
-     wget
+RUN apk add --no-cache \
+        build-base \
+        cmake \
+        git \
+        linux-headers \
+        wget
 
-# Easy configurable values; if you want these values to impact the docker image,
-# you must edit these values and build
-ENV XRB_BRANCH=master \
-    XRB_URL=https://github.com/clemahieu/raiblocks.git \
-    BOOST_URL=http://sourceforge.net/projects/boost/files/boost/1.66.0/boost_1_66_0.tar.gz/download
+# Where to download boost from
+ENV BOOST_URL=http://sourceforge.net/projects/boost/files/boost/1.66.0/boost_1_66_0.tar.gz/download
 
 WORKDIR /
 
@@ -25,8 +21,12 @@ RUN wget -O boost.tar.gz ${BOOST_URL} \
     && rm boost.tar.gz \
     && cd boost \
     && ./bootstrap.sh \
-    && ./b2 --prefix=/[boost] link=static install; exit 0 \
+    && ./b2 --prefix=/[boost] link=static install &> NULL \
     && cd .. && rm -rf boost
+
+# XRB Build Params
+ENV XRB_BRANCH=master \
+    XRB_URL=https://github.com/clemahieu/raiblocks.git
 
 # Clone the RaiBlocks git, change branch, and build
 RUN git clone ${XRB_URL} raiblocks \
