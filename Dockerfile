@@ -9,11 +9,14 @@ RUN apt-get update && apt-get install -y \
     git \
     wget
 
-ENV BOOST_URL=http://sourceforge.net/projects/boost/files/boost/1.66.0/boost_1_66_0.tar.gz/download
+ENV BOOST_URL=http://sourceforge.net/projects/boost/files/boost/1.66.0/boost_1_66_0.tar.gz/download \
+    XRB_BRANCH=master \
+    XRB_URL=https://github.com/clemahieu/raiblocks.git
 
 WORKDIR /
 
-# Download and install boost
+# Download and install boost, then download and build rai_node, then remove
+# boost
 RUN wget -O boost.tar.gz ${BOOST_URL} \
     && mkdir boost \
     && tar xzf boost.tar.gz -C boost --strip-components 1 \
@@ -21,13 +24,8 @@ RUN wget -O boost.tar.gz ${BOOST_URL} \
     && cd boost \
     && ./bootstrap.sh \
     && ./b2 --prefix=/[boost] link=static install \
-    && cd .. && rm -rf boost
-
-ENV XRB_BRANCH=master \
-    XRB_URL=https://github.com/clemahieu/raiblocks.git
-
-# Clone the RaiBlocks git, change branch, and build
-RUN git clone ${XRB_URL} raiblocks \
+    && cd .. && rm -rf boost \
+    && git clone ${XRB_URL} raiblocks \
     && cd raiblocks \
     && git checkout ${XRB_BRANCH} \
     && git submodule init \
@@ -37,7 +35,9 @@ RUN git clone ${XRB_URL} raiblocks \
     && cmake -DBOOST_ROOT=/[boost] -G "Unix Makefiles" .. \
     && make rai_node \
     && mv rai_node / \
-    && rm -rf raiblocks
+    && cd / \
+    && rm -rf raiblocks \
+    && rm -rf [boost]
 
 EXPOSE 7075 7075/udp 7076
 
