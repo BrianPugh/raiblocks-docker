@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM nvidia/cuda:8.0-runtime-ubuntu14.04
 LABEL maintainer="Brian Pugh <bnp117@gmail.com>"
 
 # Install some standard packages
