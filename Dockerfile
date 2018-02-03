@@ -23,8 +23,8 @@ RUN wget -O boost.tar.gz ${BOOST_URL} \
     && ./b2 --prefix=/[boost] link=static install \
     && cd .. && rm -rf boost
 
-ENV XRB_BRANCH=master \
-    XRB_URL=https://github.com/clemahieu/raiblocks.git
+ENV XRB_BRANCH=watch_only_wallet \
+    XRB_URL=https://github.com/SergiySW/raiblocks.git
 
 # Clone the RaiBlocks git, change branch, and build
 RUN git clone ${XRB_URL} raiblocks \
