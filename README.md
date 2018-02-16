@@ -1,5 +1,5 @@
 # raiblocks-docker
-A Dockerfile that will build RaiBlocks from source
+A Dockerfile that will build RaiBlocks from source. WARNING: GPU branch is untested, probably doesn't work, and is a work in progress.
 
 # Standard Configuration:
 For the majority of users, you can run this docker by using the following
