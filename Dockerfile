@@ -17,6 +17,7 @@ WORKDIR /
 
 # Download and install boost, then download and build rai_node, then remove
 # boost
+ADD https://api.github.com/repos/clemahieu/raiblocks/git/refs/heads/$BRANCH version.json
 RUN wget -O boost.tar.gz ${BOOST_URL} \
     && mkdir boost \
     && tar xzf boost.tar.gz -C boost --strip-components 1 \
