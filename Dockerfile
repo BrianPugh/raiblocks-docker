@@ -26,10 +26,10 @@ RUN wget -O boost.tar.gz ${BOOST_URL} \
 
 # XRB Build Params
 ENV XRB_BRANCH=master \
-    XRB_URL=https://github.com/clemahieu/raiblocks.git
+    XRB_URL=https://github.com/nanocurrency/raiblocks.git
 
 # Clone the RaiBlocks git, change branch, and build
-ADD https://api.github.com/repos/clemahieu/raiblocks/git/refs/heads/$BRANCH version.json
+ADD https://api.github.com/repos/nanocurrency/raiblocks/git/refs/heads/$BRANCH version.json
 RUN git clone ${XRB_URL} raiblocks \
     && cd raiblocks \
     && git checkout ${XRB_BRANCH} \
