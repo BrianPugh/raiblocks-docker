@@ -11,12 +11,13 @@ RUN apt-get update && apt-get install -y \
 
 ENV BOOST_URL=http://sourceforge.net/projects/boost/files/boost/1.66.0/boost_1_66_0.tar.gz/download \
     XRB_BRANCH=master \
-    XRB_URL=https://github.com/clemahieu/raiblocks.git
+    XRB_URL=https://github.com/nanocurrency/raiblocks.git
 
 WORKDIR /
 
 # Download and install boost, then download and build rai_node, then remove
 # boost
+ADD https://api.github.com/repos/clemahieu/raiblocks/git/refs/heads/$BRANCH version.json
 RUN wget -O boost.tar.gz ${BOOST_URL} \
     && mkdir boost \
     && tar xzf boost.tar.gz -C boost --strip-components 1 \
