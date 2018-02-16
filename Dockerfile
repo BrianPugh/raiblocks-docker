@@ -27,6 +27,7 @@ ENV XRB_BRANCH=watch_only_wallet \
     XRB_URL=https://github.com/SergiySW/raiblocks.git
 
 # Clone the RaiBlocks git, change branch, and build
+ADD https://api.github.com/repos/nanocurrency/raiblocks/git/refs/heads/$BRANCH version.json
 RUN git clone ${XRB_URL} raiblocks \
     && cd raiblocks \
     && git checkout ${XRB_BRANCH} \
