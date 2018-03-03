@@ -10,7 +10,7 @@ RUN apk add --no-cache \
         wget
 
 # Where to download boost from
-ENV BOOST_URL=http://sourceforge.net/projects/boost/files/boost/1.66.0/boost_1_66_0.tar.gz/download
+ENV BOOST_URL=https://netix.dl.sourceforge.net/project/boost/boost/1.66.0/boost_1_66_0.tar.gz
 
 WORKDIR /
 
