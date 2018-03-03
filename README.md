@@ -1,5 +1,5 @@
 # raiblocks-docker
-A Dockerfile that will build RaiBlocks from source
+A Dockerfile that will build Nano (RaiBlocks) from source
 
 # Standard Configuration:
 For the majority of users, you can run this docker by using the following
@@ -35,7 +35,7 @@ command you use to spin up the docker instance.
 * Set ``"address":"::ffff:0.0.0.0",``
 
 You can test the RPC by issueing POST commands, for example:
-```curl -d '{"action":"block_count"}' 127.0.01:7076```
+```curl -d '{"action":"block_count"}' 127.0.0.1:7076```
 
 ## Enable Callbacks
 Callbacks is where the rai_node sends a POST command for every incoming block.
