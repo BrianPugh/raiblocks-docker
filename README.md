@@ -1,4 +1,7 @@
 # raiblocks-docker
+
+[Deprecated] Please use the official https://hub.docker.com/r/nanocurrency/nano/
+
 A Dockerfile that will build Nano (RaiBlocks) from source
 
 # Standard Configuration:
